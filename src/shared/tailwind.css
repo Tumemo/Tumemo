@@ -127,3 +127,13 @@
     @apply font-sans;
     }
 }
+
+@theme {
+  --animate-menuTitle: menuTitle 0.2s ease-in-out;
+}
+
+@keyframes menuTitle {
+  from{
+    transform: translateX(-1rem);
+  }
+}
