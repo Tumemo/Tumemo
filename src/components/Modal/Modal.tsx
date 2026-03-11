@@ -1,17 +1,23 @@
-import { PlusCircle } from "lucide-react"
+import { ChevronDownIcon, PlusCircle } from "lucide-react"
 import { Button } from "../ui/button"
 import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog"
 import { Label } from "../ui/label"
 import { Input } from "../ui/input"
 import axios from "axios"
 import { useState } from "react"
+import { Textarea } from "../ui/textarea"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../ui/select"
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
+import { Calendar } from "../ui/calendar"
+import { format } from "path"
 
 function Modal(){
+    const [date,setDate] = useState<Date>()
     const [nome,setNome] = useState('')
     const [open,setOpen] = useState(false)
     async function AdicionarTarefa(evento:React.SubmitEvent<HTMLFormElement>){
         evento.preventDefault()
-        await axios.post("http://localhost:8000/src/api/tasks.php",{
+        await axios.post("http://localhost/tumemo/src/api/tasks.php",{
             nome: nome,
             id_usuario: sessionStorage.getItem('id_usuario')
         })
@@ -26,9 +32,43 @@ function Modal(){
                     <DialogTitle className="text-2xl font-bold">Adicionar Nova Tarefa</DialogTitle>
                 </DialogHeader>
                 <form onSubmit={AdicionarTarefa}>
-                    <Label htmlFor="nomeTarefa">Nome:</Label>
-                    <Input onChange={e => setNome(e.target.value)} type="text" id="nomeTarefa" placeholder="Estudar, Treinar, Comprar..."/>
-                    <div className="flex justify-end gap-3">
+                    <div>
+                        <Label htmlFor="nomeTarefa">Nome:</Label>
+                        <Input onChange={e => setNome(e.target.value)} type="text" id="nomeTarefa" placeholder="Estudar, Treinar, Comprar..."/>
+                    </div>
+                    <div>
+                        <Label htmlFor="descricao">Descrição tarefa</Label>
+                        <Textarea className="my-3" id="descricao" placeholder="Fazer assim...."/>
+                    </div>
+                    <div className="mb-3">
+                        <Label className="mb-3">Prioridade</Label>
+                        <Select>
+                            <SelectTrigger>
+                                <SelectValue placeholder="Selecione uma opção.." />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup>
+                                    <SelectLabel>Prioridade</SelectLabel>
+                                    <SelectItem value="Baixa">Baixa</SelectItem>
+                                    <SelectItem value="Média">Média</SelectItem>
+                                    <SelectItem value="Alta">Alta</SelectItem>
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+                    </div>
+                    <div>
+                        <Popover>
+                            <PopoverTrigger asChild>
+                                <Button variant={'outline'} data-empty={!date}>
+                                    {date ? format(date, "PPP") : <span>Pegar Data</span>} 
+                                    <ChevronDownIcon/></Button>
+                            </PopoverTrigger>
+                            <PopoverContent>
+                                <Calendar mode="single" selected={date} onSelect={setDate} defaultMonth={date}/>
+                            </PopoverContent>
+                        </Popover>
+                    </div>
+                    <div className="flex justify-between">
                         <DialogClose asChild><Button variant={'secondary'}>Cancelar</Button></DialogClose>
                         <Button type="submit">Adicionar</Button>
                     </div>

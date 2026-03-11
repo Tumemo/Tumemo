@@ -1,16 +1,29 @@
-import { Home, LogOut, Settings } from "lucide-react"
+import { Book, BookCheck, Home, LogOut, Moon, Settings, UserCircle } from "lucide-react"
 import { Sidebar, SidebarContent, SidebarGroup, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarTrigger, useSidebar } from "../ui/sidebar"
 import { TooltipProvider } from "../ui/tooltip"
+import { Link } from "react-router-dom"
 
 function Navbar(){
     const itens = [
         {
             texto:'Home',
-            icon: <Home/>
+            icon: <Home/>,
+            path: '/dashboard'
         },
         {
             texto:"Configurações",
-            icon: <Settings/>
+            icon: <Settings/>,
+            path:'/config'
+        },
+        {
+            texto:"Tarefas",
+            icon: <Book/>,
+            path:'/tasks'
+        },
+        {
+            texto:"Tarefas Concluidas",
+            icon: <BookCheck/>,
+            path:'/tasks/completas'
         }
     ]
     const {open} = useSidebar()
@@ -26,7 +39,9 @@ function Navbar(){
                     <SidebarMenu>
                         {itens.map(item =>
                             <SidebarMenuItem key={item.texto}>
-                                <SidebarMenuButton className="cursor-pointer" tooltip={item.texto}>{item.icon}{item.texto}</SidebarMenuButton>
+                                <Link to={item.path}>
+                                    <SidebarMenuButton className="cursor-pointer" tooltip={item.texto}>{item.icon}{item.texto}</SidebarMenuButton>
+                                </Link>
                             </SidebarMenuItem>
                         )}
                     </SidebarMenu>
@@ -34,7 +49,13 @@ function Navbar(){
                 <SidebarGroup className="absolute bottom-0">
                     <SidebarMenu>
                         <SidebarMenuItem>
-                            <SidebarMenuButton className="cursor-pointer"><LogOut/>Logout</SidebarMenuButton>
+                            <SidebarMenuButton className="cursor-pointer" tooltip={'Mudar Tema'}><Moon/>Mudar tema</SidebarMenuButton>
+                        </SidebarMenuItem>
+                        <SidebarMenuItem>
+                            <SidebarMenuButton className="cursor-pointer" tooltip={'Perfil'}><UserCircle/>Perfil</SidebarMenuButton>
+                        </SidebarMenuItem>
+                        <SidebarMenuItem>
+                            <SidebarMenuButton className="cursor-pointer" tooltip={'Logout'}><LogOut/>Logout</SidebarMenuButton>
                         </SidebarMenuItem>
                     </SidebarMenu>
                 </SidebarGroup>

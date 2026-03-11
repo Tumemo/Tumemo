@@ -15,7 +15,7 @@ function Tabela(){
 
     const [tarefas,setTarefas] = useState<TarefaProps[]>([])
     async function carregarTarefas(){
-        await axios.get("http://localhost:8000/src/api/tasks.php",{
+        await axios.get("http://localhost/tumemo/src/api/tasks.php",{
             params:{
                 id_usuario:sessionStorage.getItem('id_usuario')
             }
@@ -24,7 +24,7 @@ function Tabela(){
          .catch(error => console.log(error))
     }
     async function apagarTarefa(id: number){
-        await axios.delete("http://localhost:8000/src/api/tasks.php",{
+        await axios.delete("http://localhost/tumemo/src/api/tasks.php",{
             data:{
                 id:id
             }
@@ -38,7 +38,7 @@ function Tabela(){
         } else{
             estado = "Em Progresso"
         }
-        await axios.put("http://localhost:8000/src/api/tasks.php",{
+        await axios.put("http://localhost/tumemo/src/api/tasks.php",{
             id:id,
             estado:estado
         })
@@ -66,7 +66,7 @@ function Tabela(){
                         <TableCell>{tarefa.estado}</TableCell>
                         <TableCell className="flex gap-3">
                             <BotaoEstado estado={tarefa.estado} onClick={() => mudarEstadoTarefa(tarefa.id,tarefa.estado)} />
-                            <Button variant={'destructive'} onClick={()=> apagarTarefa}>Remover <Trash/></Button>
+                            <Button variant={'destructive'} onClick={()=> apagarTarefa(tarefa.id)}>Remover <Trash/></Button>
                         </TableCell>
                     </TableRow>
                 )}

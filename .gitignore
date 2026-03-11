@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+src/components/Modal/Modal.tsx
+src/components/Tabela/Tabela.tsx
+src/pages/Login.tsx

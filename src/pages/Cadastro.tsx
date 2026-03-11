@@ -3,7 +3,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import axios from "axios"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 
 function Cadastro(){
     const [nome,setNome] = useState('')
@@ -20,6 +21,10 @@ function Cadastro(){
          .then(res => alert(res.data.mensagem))
          .catch(error => console.log(error))
     }
+
+    useEffect(()=>{
+        document.title = "Tumemo - Cadastro"
+    })
     return(
         <Card className="w-1/3 m-auto translate-y-1/2">
             <CardHeader>
@@ -42,6 +47,9 @@ function Cadastro(){
                         </div>
                         <Button type="submit" className="w-full">Criar Conta</Button>
                     </form>
+                    <Link to={'/'} className="text-blue-800 underline">
+                        Ja tem uma conta? Clique aqui
+                    </Link>
                 </CardContent>
         </Card>
     )
