@@ -1,9 +1,10 @@
 import { Book, BookCheck, Home, LogOut, Moon, Settings, UserCircle } from "lucide-react"
 import { Sidebar, SidebarContent, SidebarGroup, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarTrigger, useSidebar } from "../ui/sidebar"
 import { TooltipProvider } from "../ui/tooltip"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 function Navbar(){
+    const navegacao = useNavigate()
     const itens = [
         {
             texto:'Home',
@@ -26,6 +27,12 @@ function Navbar(){
             path:'/tasks/completas'
         }
     ]
+
+    function Logout(){
+        sessionStorage.removeItem('id_usuario')
+        alert("Logout feito com sucesso!")
+        navegacao('/')
+    }
     const {open} = useSidebar()
     return(
         <TooltipProvider>
@@ -55,7 +62,7 @@ function Navbar(){
                             <SidebarMenuButton className="cursor-pointer" tooltip={'Perfil'}><UserCircle/>Perfil</SidebarMenuButton>
                         </SidebarMenuItem>
                         <SidebarMenuItem>
-                            <SidebarMenuButton className="cursor-pointer" tooltip={'Logout'}><LogOut/>Logout</SidebarMenuButton>
+                            <SidebarMenuButton onClick={()=> Logout()} className="cursor-pointer" tooltip={'Logout'}><LogOut/>Logout</SidebarMenuButton>
                         </SidebarMenuItem>
                     </SidebarMenu>
                 </SidebarGroup>

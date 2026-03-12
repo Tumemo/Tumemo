@@ -17,7 +17,7 @@ switch ($metodo){
     case 'POST':
         $sql = "INSERT into tarefas (nome,id_usuario) values ('$data->nome',$data->id_usuario)";
         $res = $mysqli->query($sql);
-        echo json_encode(["mensagem" => "Tarefa Criada com sucesso!"]);
+        echo json_encode(["mensagem" => "Tarefa Criada com sucesso!", "nome" => '$data->nome']);
         break;
     case 'PUT':
         $sql = "UPDATE tarefas set estado = '$data->estado' where id = $data->id";

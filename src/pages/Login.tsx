@@ -16,7 +16,7 @@ function Login(){
 
     async function Logar(evento:React.SubmitEvent<HTMLFormElement>){
         evento.preventDefault()
-        await axios.post("http://localhost/tumemo/src/api/login.php",{
+        await axios.post(import.meta.env.VITE_API_LOGIN,{
             email:email,
             senha:senha
         })

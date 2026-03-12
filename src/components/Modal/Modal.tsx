@@ -3,26 +3,25 @@ import { Button } from "../ui/button"
 import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog"
 import { Label } from "../ui/label"
 import { Input } from "../ui/input"
-import axios from "axios"
 import { useState } from "react"
 import { Textarea } from "../ui/textarea"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../ui/select"
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
 import { Calendar } from "../ui/calendar"
-import { format } from "path"
+import { useTarefas } from "@/context/TarefaContext"
 
 function Modal(){
     const [date,setDate] = useState<Date>()
     const [nome,setNome] = useState('')
     const [open,setOpen] = useState(false)
-    async function AdicionarTarefa(evento:React.SubmitEvent<HTMLFormElement>){
+    const {AdicionarTarefa} = useTarefas()
+    async function adicionarTarefa(evento:React.SubmitEvent<HTMLFormElement>){
         evento.preventDefault()
-        await axios.post("http://localhost/tumemo/src/api/tasks.php",{
-            nome: nome,
-            id_usuario: sessionStorage.getItem('id_usuario')
-        })
-         .then(res => alert(res.data.mensagem))
-         .catch(error => alert("Falha ao adicionar tarefa "+error))
+        const sucesso = await AdicionarTarefa(nome)
+        if(sucesso){
+            setNome('')
+            setOpen(false)
+        }
     }
     return(
         <Dialog open={open} onOpenChange={setOpen}>
@@ -31,7 +30,7 @@ function Modal(){
                 <DialogHeader>
                     <DialogTitle className="text-2xl font-bold">Adicionar Nova Tarefa</DialogTitle>
                 </DialogHeader>
-                <form onSubmit={AdicionarTarefa}>
+                <form onSubmit={adicionarTarefa}>
                     <div>
                         <Label htmlFor="nomeTarefa">Nome:</Label>
                         <Input onChange={e => setNome(e.target.value)} type="text" id="nomeTarefa" placeholder="Estudar, Treinar, Comprar..."/>
@@ -60,7 +59,7 @@ function Modal(){
                         <Popover>
                             <PopoverTrigger asChild>
                                 <Button variant={'outline'} data-empty={!date}>
-                                    {date ? format(date, "PPP") : <span>Pegar Data</span>} 
+                                     
                                     <ChevronDownIcon/></Button>
                             </PopoverTrigger>
                             <PopoverContent>
