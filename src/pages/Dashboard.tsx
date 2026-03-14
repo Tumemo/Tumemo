@@ -1,8 +1,8 @@
-import Layout from "@/components/Layout/Layout"
 import Modal from "@/components/Modal/Modal"
 import Tabela from "@/components/Tabela/Tabela"
 import { Card, CardContent} from "@/components/ui/card"
 import { useTarefas } from "@/context/TarefaContext"
+import { BookMarked, ChartColumnIncreasing, CircleAlert } from "lucide-react"
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
@@ -19,36 +19,50 @@ function Dashboard() {
         }
     }, [])
     return (
-        <Layout>
-            <main className="w-dvw p-5">
-                <section className="flex justify-around h-1/3 mb-5">
-                    <Card className="border-blue-800 border w-1/4">
-                        <CardContent className="flex flex-col justify-center items-center h-full gap-2">
-                            <h2 className="text-3xl">{tarefas.length}</h2>
-                            <p>Tarefas Pendentes</p>
-                        </CardContent>
-                    </Card>
-                    <Card className="border-emerald-500 border w-1/4">
-                        <CardContent className="flex flex-col justify-center items-center h-full">
-                            <p>{porcentagem}% Completo</p>
-                        </CardContent>
-                    </Card>
-                    <Card className="border-orange-500 border w-1/4">
-                        <CardContent className="flex flex-col justify-center items-center h-full gap-2">
-                            <h2 className="text-3xl">2</h2>
-                            <p>Tarefas Atrasadas</p>
-                        </CardContent>
-                    </Card>
-                </section>
-                <section>
-                    <div className="flex justify-between">
-                        <h2>Tarefas</h2>
-                        <Modal />
-                    </div>
-                    <Tabela />
-                </section>
-            </main>
-        </Layout>
+        <main className="w-dvw p-5">
+            <section className="flex justify-around h-[15%] mb-5">
+                <Card className=" w-1/4 p-2">
+                    <CardContent className="flex justify-between h-full p-2">
+                        <div>
+                            <p className="text-texto-secundario">Tarefas Pendentes</p>
+                            <h2 className="text-3xl font-bold">{tarefas.length - tarefasFeitas.length}</h2>
+                        </div>
+                        <div className="bg-indigo/10 p-1 h-max rounded-md">
+                            <BookMarked className="text-indigo"/>
+                        </div>
+                    </CardContent>
+                </Card>
+                <Card className=" w-1/4 p-2">
+                    <CardContent className="flex justify-between h-full p-2">
+                        <div>
+                            <p className="text-texto-secundario">Completo</p>
+                            <h2 className="text-3xl font-bold">{porcentagem}%</h2>
+                        </div>
+                        <div className="bg-verde/10 h-max p-1 rounded-md">
+                            <ChartColumnIncreasing className="text-verde"/>
+                        </div>
+                    </CardContent>
+                </Card>
+                <Card className="border w-1/4 p-2">
+                    <CardContent className="flex justify-between h-full p-2">
+                        <div>
+                            <p className="text-texto-secundario">Tarefas Atrasadas</p>
+                            <h2 className="text-3xl font-bold">2</h2>
+                        </div>
+                        <div className="bg-amarelo/10 h-max p-1 rounded-md">
+                            <CircleAlert className="text-amarelo"/>
+                        </div>
+                    </CardContent>
+                </Card>
+            </section>
+            <section>
+                <div className="flex justify-between items-center my-3">
+                    <h2>Tarefas</h2>
+                    <Modal />
+                </div>
+                <Tabela />
+            </section>
+        </main>
     )
 }
 

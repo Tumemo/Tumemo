@@ -25,15 +25,15 @@ function Modal(){
     }
     return(
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger asChild><Button><PlusCircle/>Nova Tarefa</Button></DialogTrigger>
-            <DialogContent>
+            <DialogTrigger asChild><Button className="bg-indigo hover:bg-indigo/70 text-white"><PlusCircle/>Nova Tarefa</Button></DialogTrigger>
+            <DialogContent className="bg-fundo">
                 <DialogHeader>
                     <DialogTitle className="text-2xl font-bold">Adicionar Nova Tarefa</DialogTitle>
                 </DialogHeader>
                 <form onSubmit={adicionarTarefa}>
                     <div>
                         <Label htmlFor="nomeTarefa">Nome:</Label>
-                        <Input onChange={e => setNome(e.target.value)} type="text" id="nomeTarefa" placeholder="Estudar, Treinar, Comprar..."/>
+                        <Input className="bg-card" onChange={e => setNome(e.target.value)} type="text" id="nomeTarefa" placeholder="Estudar, Treinar, Comprar..."/>
                     </div>
                     <div>
                         <Label htmlFor="descricao">Descrição tarefa</Label>
@@ -67,9 +67,9 @@ function Modal(){
                             </PopoverContent>
                         </Popover>
                     </div>
-                    <div className="flex justify-between">
-                        <DialogClose asChild><Button variant={'secondary'}>Cancelar</Button></DialogClose>
-                        <Button type="submit">Adicionar</Button>
+                    <div className="flex justify-between my-3">
+                        <DialogClose asChild><Button className="bg-transparent text-white hover:bg-indigo/10">Cancelar</Button></DialogClose>
+                        <Button type="submit" className="bg-indigo hover:bg-indigo/70 text-white">Adicionar</Button>
                     </div>
                 </form>
             </DialogContent>

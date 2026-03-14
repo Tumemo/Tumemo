@@ -130,6 +130,14 @@
 
 @theme {
   --animate-menuTitle: menuTitle 0.2s ease-in-out;
+  --color-indigo: #5048e5;
+  --color-fundo:#0F111A;
+  --color-card:#161925;
+  --color-texto-primario:#F3f4f6;
+  --color-texto-secundario:#9ca3af;
+  --color-bordas:#1F2937;
+  --color-verde:#10B981;
+  --color-amarelo:#F59E0B;
 }
 
 @keyframes menuTitle {

@@ -30,10 +30,10 @@ function Login(){
          .catch(error => alert("Erro ao fazer login! "+error))
     }
     return(
-        <Card className="w-1/3 translate-y-1/2 m-auto">
+        <Card className="w-1/3 translate-y-1/2 m-auto bg-card">
             <CardHeader>
-                <CardTitle>Entrar</CardTitle>
-                <CardDescription>Entre para ter acesso ao nosso conteúdo</CardDescription>
+                <CardTitle className="text-3xl font-bold">Bem-vindo de volta</CardTitle>
+                <CardDescription>Acesse sua conta para continuar</CardDescription>
             </CardHeader>
             <CardContent>
                 <form onSubmit={Logar} className="mb-3">
@@ -45,11 +45,12 @@ function Login(){
                         <Label htmlFor="senha">Senha:</Label>
                         <Input onChange={e => setSenha(e.target.value)} type="password" id="senha" placeholder="••••••••" required/>
                     </div>
-                    <Button type="submit" className="w-full">Entrar</Button>
+                    <Button type="submit" className="w-full bg-indigo hover:bg-indigo/70 text-white">Entrar</Button>
                 </form>
-                <Link to={'/cadastro'} className="text-blue-700 underline">
-                    Ainda nao tem conta? Clique aqui
-                </Link>
+                <div className="w-full flex justify-center gap-3">
+                    <p>Ainda não tem conta?</p>
+                    <Link to={'/cadastro'} className="text-indigo">Clique Aqui</Link>
+                </div>
             </CardContent>
         </Card>
     )

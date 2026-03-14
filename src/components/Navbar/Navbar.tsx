@@ -36,18 +36,18 @@ function Navbar(){
     const {open} = useSidebar()
     return(
         <TooltipProvider>
-            <Sidebar collapsible="icon">
-            <SidebarHeader className="flex-row justify-between items-center">
+            <Sidebar collapsible="icon" >
+            <SidebarHeader className="flex-row justify-between items-center bg-card">
                 {open && <h2 className="text-2xl font-bold animate-menuTitle">Tumemo</h2>}
-                <SidebarTrigger/>
+                <SidebarTrigger className=" hover:text-indigo"/>
             </SidebarHeader>
-            <SidebarContent>
+            <SidebarContent className="bg-card">
                 <SidebarGroup>
                     <SidebarMenu>
                         {itens.map(item =>
                             <SidebarMenuItem key={item.texto}>
                                 <Link to={item.path}>
-                                    <SidebarMenuButton className="cursor-pointer" tooltip={item.texto}>{item.icon}{item.texto}</SidebarMenuButton>
+                                    <SidebarMenuButton className="cursor-pointer hover:bg-bordas hover:text-indigo" tooltip={item.texto}>{item.icon}{item.texto}</SidebarMenuButton>
                                 </Link>
                             </SidebarMenuItem>
                         )}
@@ -56,13 +56,15 @@ function Navbar(){
                 <SidebarGroup className="absolute bottom-0">
                     <SidebarMenu>
                         <SidebarMenuItem>
-                            <SidebarMenuButton className="cursor-pointer" tooltip={'Mudar Tema'}><Moon/>Mudar tema</SidebarMenuButton>
+                            <Link to={'/mudartema'}>
+                                <SidebarMenuButton className="cursor-pointer hover:bg-bordas hover:text-indigo" tooltip={'Mudar Tema'}><Moon/>Mudar tema</SidebarMenuButton>
+                            </Link>
                         </SidebarMenuItem>
                         <SidebarMenuItem>
-                            <SidebarMenuButton className="cursor-pointer" tooltip={'Perfil'}><UserCircle/>Perfil</SidebarMenuButton>
+                            <SidebarMenuButton className="cursor-pointer hover:bg-bordas hover:text-indigo" tooltip={'Perfil'}><UserCircle/>Perfil</SidebarMenuButton>
                         </SidebarMenuItem>
                         <SidebarMenuItem>
-                            <SidebarMenuButton onClick={()=> Logout()} className="cursor-pointer" tooltip={'Logout'}><LogOut/>Logout</SidebarMenuButton>
+                            <SidebarMenuButton onClick={()=> Logout()} className="cursor-pointer hover:bg-bordas hover:text-indigo text-red-500" tooltip={'Logout'}><LogOut/>Logout</SidebarMenuButton>
                         </SidebarMenuItem>
                     </SidebarMenu>
                 </SidebarGroup>

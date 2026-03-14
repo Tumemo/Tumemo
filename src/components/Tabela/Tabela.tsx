@@ -17,7 +17,7 @@ function Tabela(){
     },[])
     return(
         <Table>
-            <TableHeader>
+            <TableHeader className="bg-card hover:bg-indigo/40">
                 <TableRow>
                     <TableHead>Nº</TableHead>
                     <TableHead>Nome</TableHead>
@@ -27,7 +27,7 @@ function Tabela(){
             </TableHeader>
             <TableBody>
                 {tarefas.map((tarefa,index) =>
-                    <TableRow key={tarefa.id}>
+                    <TableRow key={tarefa.id} className="hover:bg-indigo/10">
                         <TableCell>{index + 1}</TableCell>
                         <TableCell>{tarefa.nome}</TableCell>
                         <TableCell>{tarefa.estado}</TableCell>

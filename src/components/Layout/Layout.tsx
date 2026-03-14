@@ -11,7 +11,7 @@ function Layout({children} : LayoutProps){
         <SidebarProvider>
             <Navbar/>
             {children}
-            <Toaster position="bottom-right" duration={2000} expand={true} theme="dark" />
+            <Toaster position="bottom-right" duration={2000} expand={true} theme="dark"/>
         </SidebarProvider>
     )
 }
